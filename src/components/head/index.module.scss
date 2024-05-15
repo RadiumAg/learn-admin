@@ -1,19 +1,41 @@
 .header {
+  position: relative;
   overflow: hidden;
   aspect-ratio: 4/1;
-  backdrop-filter: blur(20px);
-  background-color: rgba($color: #000000, $alpha: 0.3);
+
+  &::after {
+    top: 0;
+    z-index: 2;
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(2px);
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
 }
 
 .headerIcon {
-  width: min-content;
-  margin: 20px auto;
+  z-index: 3;
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   img {
-    width: 100%;
-    height: 100%;
     width: 80px;
     height: 80px;
     border-radius: 50%;
   }
+}
+
+.background {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+  position: absolute;
 }
