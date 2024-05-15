@@ -1,9 +1,13 @@
-import React from "react";
-import "./App.scss";
+import './App.scss';
+import React from 'react';
+import Head from './components/head';
 
-const App:React.FC = () => {
-
-  return (<div></div>)
-}
+const App: React.FC = () => {
+  return (
+    <div className="">
+      <Head />
+    </div>
+  );
+};
 
 export default App;
