@@ -1,15 +1,24 @@
 import React from 'react';
-import Styles from './index.module.scss';
 import clasnames from 'classnames';
+import Styles from './index.module.scss';
 const backgroundImg = process.env.PUBLIC_URL + './header-background.png';
 
 const Head: React.FC = () => {
   return (
     <div className={clasnames(Styles.header)}>
       <div className={Styles.headerIcon}>
-        <img className={clasnames('bg-white', '')} alt="" />
+        <img
+          src={backgroundImg}
+          className={clasnames(
+            'mb-2',
+            'bg-white',
+            'object-cover',
+            'object-center'
+          )}
+          alt=""
+        />
 
-        <span>今日月阅读时长</span>
+        <span className="text-white">今日月阅读时长</span>
       </div>
       <img src={backgroundImg} className={Styles.background} alt="" />
     </div>
