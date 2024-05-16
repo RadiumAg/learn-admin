@@ -1,29 +1,44 @@
 import React from 'react';
 import Styles from './index.module.scss';
-import { Layout, Menu, Button, theme } from 'antd';
+import { Layout, Menu, Button, theme, MenuProps } from 'antd';
 import { Header, Content } from 'antd/es/layout/layout';
-import type { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import Sider from 'antd/es/layout/Sider';
 import {
   UserOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
+  ReadFilled,
+  FilePdfFilled,
 } from '@ant-design/icons';
 import { useNavigate, useOutlet } from 'react-router';
+
+type MenuItem = Required<MenuProps>['items'][number];
 
 const AdminLayout: React.FC = () => {
   const nav = useNavigate();
   const [collapsed, setCollapsed] = React.useState(false);
-  const tabs: MenuItemType[] = [
+  const tabs: MenuItem[] = [
     {
       key: 'home',
       label: '首页',
       icon: <UserOutlined />,
     },
+    {
+      key: 'read',
+      label: '阅读',
+      icon: <ReadFilled />,
+      children: [
+        {
+          key: 'pdf',
+          label: '免费Pdf',
+          icon: <FilePdfFilled />,
+        },
+      ],
+    },
   ];
 
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer },
   } = theme.useToken();
   const outlet = useOutlet();
 
@@ -35,8 +50,8 @@ const AdminLayout: React.FC = () => {
           theme="dark"
           mode="inline"
           items={tabs}
-          onDeselect={(event) => {
-            nav(event.key);
+          onSelect={(event) => {
+            nav(event.keyPath.reverse().join('/'));
           }}
         />
       </Sider>
