@@ -1,6 +1,6 @@
 import React from 'react';
 import Styles from './index.module.scss';
-import { Layout, Menu, Button, theme, MenuProps } from 'antd';
+import { Layout, Menu, Button, theme } from 'antd';
 import { Header, Content } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
 import {
@@ -10,15 +10,21 @@ import {
   ReadFilled,
   FilePdfFilled,
 } from '@ant-design/icons';
-import { KeepAlive } from '../../components';
+import { HistoryItem, KeepAlive } from '../../components';
 import { useNavigate, useOutlet } from 'react-router';
-
-type MenuItem = Required<MenuProps>['items'][number];
+import useHistoryStore from '../../store/history';
+import { findItem } from '../../utils';
+import { ItemType } from 'antd/es/menu/hooks/useItems';
 
 const AdminLayout: React.FC = () => {
   const nav = useNavigate();
+  const outlet = useOutlet();
+  const [history, setHistory] = useHistoryStore((state) => [
+    state.history,
+    state.setHistory,
+  ]);
   const [collapsed, setCollapsed] = React.useState(false);
-  const tabs: MenuItem[] = [
+  const tabs: ItemType[] = [
     {
       key: 'home',
       label: '首页',
@@ -37,11 +43,14 @@ const AdminLayout: React.FC = () => {
       ],
     },
   ];
-
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const outlet = useOutlet();
+  const historyItem = React.useMemo(() => {
+    return history.map((item) => {
+      return <HistoryItem key={item.path} {...item} />;
+    });
+  }, [history]);
 
   return (
     <Layout className={Styles.layout}>
@@ -52,7 +61,11 @@ const AdminLayout: React.FC = () => {
           mode="inline"
           items={tabs}
           onSelect={(event) => {
-            nav(event.keyPath.reverse().join('/'));
+            const { keyPath } = event;
+            const targetMenu = findItem(tabs, event.keyPath) as any;
+            const path = keyPath.reverse().join('/');
+            setHistory({ path, name: targetMenu.label, active: false });
+            nav(path);
           }}
         />
       </Sider>
@@ -68,6 +81,8 @@ const AdminLayout: React.FC = () => {
               height: 64,
             }}
           />
+
+          <div>{historyItem}</div>
         </Header>
         <Content
           style={{

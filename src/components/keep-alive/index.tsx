@@ -16,9 +16,13 @@ const KeepAlive: React.FC<React.PropsWithChildren<KeepAliveProps>> = (
 
   const pages = [...cachePage.current].map(([pathname, children]) => {
     if (location.pathname === pathname) {
-      return <div>{children}</div>;
+      return <div key={pathname}>{children}</div>;
     } else {
-      return <div style={{ display: 'none' }}>{children}</div>;
+      return (
+        <div key={pathname} style={{ display: 'none' }}>
+          {children}
+        </div>
+      );
     }
   });
 
