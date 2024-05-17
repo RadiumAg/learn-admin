@@ -10,6 +10,7 @@ import {
   ReadFilled,
   FilePdfFilled,
 } from '@ant-design/icons';
+import { KeepAlive } from '../../components';
 import { useNavigate, useOutlet } from 'react-router';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -75,7 +76,7 @@ const AdminLayout: React.FC = () => {
             minHeight: 280,
           }}
         >
-          {outlet}
+          <KeepAlive>{outlet}</KeepAlive>
         </Content>
       </Layout>
     </Layout>
