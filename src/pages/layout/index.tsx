@@ -15,6 +15,7 @@ import { useNavigate, useOutlet } from 'react-router';
 import useHistoryStore from '../../store/history';
 import { findItem } from '../../utils';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
+import classNames from 'classnames';
 
 const AdminLayout: React.FC = () => {
   const nav = useNavigate();
@@ -63,14 +64,17 @@ const AdminLayout: React.FC = () => {
           onSelect={(event) => {
             const { keyPath } = event;
             const targetMenu = findItem(tabs, event.keyPath) as any;
-            const path = keyPath.reverse().join('/');
-            setHistory({ path, name: targetMenu.label, active: false });
+            const path = keyPath.toReversed().join('/');
+            setHistory({ path, name: targetMenu.label });
             nav(path);
           }}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header
+          style={{ padding: 0, background: colorBgContainer }}
+          className={classNames('h-auto', Styles.header)}
+        >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -81,8 +85,7 @@ const AdminLayout: React.FC = () => {
               height: 64,
             }}
           />
-
-          <div>{historyItem}</div>
+          <div className="flex">{historyItem}</div>
         </Header>
         <Content
           style={{

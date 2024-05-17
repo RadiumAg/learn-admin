@@ -6,18 +6,18 @@ import { useNavigate } from 'react-router';
 type HistoryItemProps = {
   name: string;
   path: string;
-  active: boolean;
 };
 
 const HistoryItem: React.FC<HistoryItemProps> = (props) => {
   const nav = useNavigate();
-  const { name, path, active } = props;
+  const { name, path } = props;
 
   const handleClick = () => {
     nav(path);
   };
+
   return (
-    <div className={classNames(Styles.historyItem, '')} onClick={handleClick}>
+    <div className={classNames(Styles.historyItem)} onClick={handleClick}>
       {name}
     </div>
   );
