@@ -1,6 +1,6 @@
 import React from 'react';
 import Styles from './index.module.scss';
-import { Layout, Menu, Button, theme } from 'antd';
+import { Layout, Menu, Button, theme, MenuProps } from 'antd';
 import { Header, Content } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
 import {
@@ -11,7 +11,7 @@ import {
   FilePdfFilled,
 } from '@ant-design/icons';
 import { HistoryItem, KeepAlive } from '../../components';
-import { useNavigate, useOutlet } from 'react-router';
+import { useLocation, useNavigate, useOutlet } from 'react-router';
 import useHistoryStore from '../../store/history';
 import { findItem } from '../../utils';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
@@ -20,6 +20,8 @@ import classNames from 'classnames';
 const AdminLayout: React.FC = () => {
   const nav = useNavigate();
   const outlet = useOutlet();
+  const location = useLocation();
+  const selectKeys = location.pathname.split('/');
   const [history, setHistory] = useHistoryStore((state) => [
     state.history,
     state.setHistory,
@@ -53,6 +55,14 @@ const AdminLayout: React.FC = () => {
     });
   }, [history]);
 
+  const handleMenuSelect: MenuProps['onSelect'] = (event) => {
+    const { keyPath } = event;
+    const targetMenu = findItem(tabs, event.keyPath) as any;
+    const path = keyPath.toReversed().join('/');
+    setHistory({ path, name: targetMenu.label });
+    nav(path);
+  };
+
   return (
     <Layout className={Styles.layout}>
       <Sider trigger={null} collapsed={collapsed}>
@@ -61,36 +71,26 @@ const AdminLayout: React.FC = () => {
           theme="dark"
           mode="inline"
           items={tabs}
-          onSelect={(event) => {
-            const { keyPath } = event;
-            const targetMenu = findItem(tabs, event.keyPath) as any;
-            const path = keyPath.toReversed().join('/');
-            setHistory({ path, name: targetMenu.label });
-            nav(path);
-          }}
+          selectedKeys={selectKeys}
+          onSelect={handleMenuSelect}
         />
       </Sider>
       <Layout>
         <Header
-          style={{ padding: 0, background: colorBgContainer }}
+          style={{ background: colorBgContainer }}
           className={classNames('h-auto', Styles.header)}
         >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
           />
-          <div className="flex">{historyItem}</div>
+          <div className={classNames('flex')}>{historyItem}</div>
         </Header>
         <Content
           style={{
             margin: '24px 16px',
-            padding: 24,
+            padding: 10,
             minHeight: 280,
           }}
         >

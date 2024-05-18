@@ -6,6 +6,7 @@ type History = { name: string; path: string };
 type HistoryState = {
   history: History[];
   setHistory: (value: History) => void;
+  deleteHistory: (value: History) => void;
 };
 
 const useHistoryStore = create(
@@ -20,6 +21,16 @@ const useHistoryStore = create(
             return { history: newHistory };
 
           newHistory.push(history);
+          return { history: newHistory };
+        });
+      },
+      deleteHistory: (history) => {
+        set((pre) => {
+          const { history: oldHistory } = pre;
+          const newHistory = [...oldHistory].filter(
+            (_) => _.path !== history.path
+          );
+
           return { history: newHistory };
         });
       },
