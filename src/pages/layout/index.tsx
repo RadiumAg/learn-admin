@@ -89,7 +89,6 @@ const AdminLayout: React.FC = () => {
         </Header>
         <Content
           style={{
-            margin: '24px 16px',
             padding: 10,
             minHeight: 280,
           }}
