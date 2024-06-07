@@ -9,10 +9,14 @@ type ItemProps = {
 };
 
 const Item: React.FC<ItemProps> = (props) => {
-  const { cover, name } = props;
+  const { cover, name, url } = props;
+
+  const handleOpen = () => {
+    window.open(url);
+  };
 
   return (
-    <div className={classNames(Styles.item, 'shadow-sm')}>
+    <div className={classNames(Styles.item, 'shadow-sm')} onClick={handleOpen}>
       <div className={Styles.cover}>
         <img src={cover} alt='cover' />
       </div>
