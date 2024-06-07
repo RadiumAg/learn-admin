@@ -1,0 +1,25 @@
+.item {
+  width: 300px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+
+  .cover {
+    height: 400px;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .name {
+    padding: 10 30px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
