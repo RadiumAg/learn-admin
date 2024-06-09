@@ -43,6 +43,11 @@ const AdminLayout: React.FC = () => {
           label: '免费Pdf',
           icon: <FilePdfFilled />,
         },
+        {
+          key: 'pdfCreate',
+          label: '创建pdf',
+          icon: <FilePdfFilled />,
+        },
       ],
     },
   ];
