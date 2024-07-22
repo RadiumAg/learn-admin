@@ -2,7 +2,7 @@ import React from 'react';
 import Item from './components/items';
 import Styles from './index.module.scss';
 
-const Pdf: React.FC = () => {
+const PdfCreate: React.FC = () => {
   const [pdfs, setPdfs] = React.useState([
     {
       id: '1',
@@ -53,4 +53,4 @@ const Pdf: React.FC = () => {
   return <div className={Styles.pdfWrapper}>{pdfsItems}</div>;
 };
 
-export default Pdf;
+export default PdfCreate;

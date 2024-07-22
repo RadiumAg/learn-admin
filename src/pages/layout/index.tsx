@@ -43,6 +43,11 @@ const AdminLayout: React.FC = () => {
           label: '免费Pdf',
           icon: <FilePdfFilled />,
         },
+        {
+          key: 'pdfCreate',
+          label: '创建pdf',
+          icon: <FilePdfFilled />,
+        },
       ],
     },
   ];
@@ -66,10 +71,10 @@ const AdminLayout: React.FC = () => {
   return (
     <Layout className={Styles.layout}>
       <Sider trigger={null} collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
+        <div className='demo-logo-vertical' />
         <Menu
-          theme="dark"
-          mode="inline"
+          theme='dark'
+          mode='inline'
           items={tabs}
           selectedKeys={selectKeys}
           onSelect={handleMenuSelect}
@@ -81,7 +86,7 @@ const AdminLayout: React.FC = () => {
           className={classNames('h-auto', Styles.header)}
         >
           <Button
-            type="text"
+            type='text'
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
           />
