@@ -7,7 +7,7 @@ class Pdf {
   request!: Request;
 
   createPdp(data: CreatePdpData) {
-    return this.request({ url: '/createPdfs', method: 'post' });
+    return this.request({ url: '/createPdfs', method: 'post', data });
   }
 }
 
