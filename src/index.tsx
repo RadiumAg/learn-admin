@@ -1,10 +1,11 @@
 import './index.scss';
 import React from 'react';
+import { App, ConfigProvider } from 'antd';
 import { router } from './route';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router';
-import { App } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,9 +13,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App>
-      <RouterProvider router={router} />
-    </App>
+    <ConfigProvider locale={zhCN}>
+      <App>
+        <RouterProvider router={router} />
+      </App>
+    </ConfigProvider>
   </React.StrictMode>
 );
 

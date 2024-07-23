@@ -2,9 +2,11 @@ import React from 'react';
 import Item from './components/items';
 import Styles from './index.module.scss';
 import { App, Button } from 'antd';
+import { useEditAddFormDialog } from './use-edit-add-form';
 
 const Pdf: React.FC = () => {
-  const { modal } = App.useApp();
+  const [modalDom, toggleVisible] = useEditAddFormDialog();
+
   const [pdfs, setPdfs] = React.useState([
     {
       id: '1',
@@ -87,21 +89,15 @@ const Pdf: React.FC = () => {
 
   const pdfsItems = pdfs.map((pdf, key) => <Item key={key} {...pdf} />);
 
-  const handleOpenEditDialog = () => {
-    modal.info({
-      description: 'Hello, Ant Design!!',
-      placement: 'topLeft',
-    });
-  };
-
   return (
     <>
       <div className='pb-2'>
-        <Button type='primary' onClick={handleOpenEditDialog}>
+        <Button type='primary' onClick={toggleVisible}>
           创建
         </Button>
       </div>
       <div className={Styles.pdfWrapper}>{pdfsItems}</div>
+      {modalDom}
     </>
   );
 };
