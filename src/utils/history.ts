@@ -1,4 +1,4 @@
-import type { ItemType, MenuItemGroupType } from 'antd/es/menu/hooks/useItems';
+import type { ItemType, MenuItemGroupType } from 'antd/es/menu/interface';
 
 /**
  *
@@ -14,7 +14,7 @@ const findItem = (items: ItemType[], keyPath: string[]) => {
   while (index < keyPath.length) {
     const key = keyPath[index];
     item = items.find((item) => item!.key === key) as MenuItemGroupType;
-    items = item.children as any;
+    items = item.children!;
     index++;
   }
 

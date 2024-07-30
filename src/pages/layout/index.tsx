@@ -8,7 +8,6 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   ReadFilled,
-  FilePdfFilled,
 } from '@ant-design/icons';
 import { HistoryItem, KeepAlive } from '@/components';
 import { useLocation, useNavigate, useOutlet } from 'react-router';
@@ -41,7 +40,17 @@ const AdminLayout: React.FC = () => {
         {
           key: 'pdf',
           label: '免费Pdf',
-          icon: <FilePdfFilled />,
+        },
+      ],
+    },
+    {
+      key: 'user',
+      label: '用户管理',
+      icon: <UserOutlined />,
+      children: [
+        {
+          key: 'manage',
+          label: '用户权限',
         },
       ],
     },
@@ -57,9 +66,11 @@ const AdminLayout: React.FC = () => {
 
   const handleMenuSelect: MenuProps['onSelect'] = (event) => {
     const { keyPath } = event;
-    const targetMenu = findItem(tabs, event.keyPath) as any;
+    const targetMenu = findItem(tabs, event.keyPath)!;
+    if (!targetMenu || !targetMenu.label) return;
     const path = keyPath.toReversed().join('/');
-    setHistory({ path, name: targetMenu.label });
+
+    setHistory({ path, name: targetMenu.label.toString() });
     nav(path);
   };
 
