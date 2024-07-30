@@ -42,4 +42,4 @@ const useHistoryStore = create(
   )
 );
 
-export default useHistoryStore;
+export { useHistoryStore };

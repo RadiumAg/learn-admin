@@ -10,7 +10,7 @@ type Request = <R, T = any>(
 
 function http(path: string) {
   const axiosInstance = axios.create({
-    baseURL: path || process.env.REACT_APP_BASE_URL,
+    baseURL: path || import.meta.env.VITE_BASE_URL,
   });
 
   axiosInstance.interceptors.response.use((response) => {

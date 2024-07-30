@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from './components/items';
 import Styles from './index.module.scss';
-import { App, Button } from 'antd';
+import { Button } from 'antd';
 import { useEditAddFormDialog } from './use-edit-add-form';
 
 const Pdf: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import clasnames from 'classnames';
 import Styles from './index.module.scss';
-const backgroundImg = process.env.PUBLIC_URL + './header-background.png';
+import backgroundImg from '@/assets/header-background.png';
 
 const Head: React.FC = () => {
   return (
@@ -15,12 +15,12 @@ const Head: React.FC = () => {
             'object-cover',
             'object-center'
           )}
-          alt=""
+          alt=''
         />
 
-        <span className="text-white">今日月阅读时长</span>
+        <span className='text-white'>今日月阅读时长</span>
       </div>
-      <img src={backgroundImg} className={Styles.background} alt="" />
+      <img src={backgroundImg} className={Styles.background} alt='' />
     </div>
   );
 };

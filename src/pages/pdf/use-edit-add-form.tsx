@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Modal, Upload } from 'antd';
-import { useApi } from '../../hooks/use-api/use-api';
+import { useApi } from '@/hooks';
 import { PlusOutlined } from '@ant-design/icons';
 
 const useEditAddFormDialog = () => {

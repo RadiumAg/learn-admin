@@ -10,12 +10,12 @@ import {
   ReadFilled,
   FilePdfFilled,
 } from '@ant-design/icons';
-import { HistoryItem, KeepAlive } from '../../components';
+import { HistoryItem, KeepAlive } from '@/components';
 import { useLocation, useNavigate, useOutlet } from 'react-router';
-import useHistoryStore from '../../store/history';
-import { findItem } from '../../utils';
-import { ItemType } from 'antd/es/menu/hooks/useItems';
+import { useHistoryStore } from '@/store';
+import { findItem } from '@/utils';
 import classNames from 'classnames';
+import { ItemType } from 'antd/es/menu/interface';
 
 const AdminLayout: React.FC = () => {
   const nav = useNavigate();
